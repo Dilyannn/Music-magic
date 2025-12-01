@@ -1,4 +1,4 @@
-import { Routes, Route, Link } from 'react-router';
+import { Routes, Route, Link, Navigate, Outlet } from 'react-router';
 import NavBar from './components/NavBar';
 
 function App() {
@@ -14,13 +14,17 @@ function App() {
           <Route path="/edit/:id" element={<div className="text-center text-2xl mt-10">Edit Record</div>} />
           <Route path="/about" element={<div className="text-center text-2xl mt-10">About Us</div>} />
           <Route path="/contact" element={<div className="text-center text-2xl mt-10">Contact Us</div>} />
-          <Route path="/login" element={
-            <div className="text-center mt-10">
-              <h2 className="text-2xl mb-4">Login Page</h2>
-              <p>Don't have an account? <Link to="/register" className="text-purple-500 hover:underline">Register here</Link></p>
-            </div>
-          } />
-          <Route path="/register" element={<div className="text-center text-2xl mt-10">Register Page</div>} />
+          
+          <Route path="/auth" element={<Outlet />}>
+            <Route index element={<Navigate to="login" />} />
+            <Route path="login" element={
+              <div className="text-center mt-10">
+                <h2 className="text-2xl mb-4">Login Page</h2>
+                <p>Don't have an account? <Link to="/auth/register" className="text-purple-500 hover:underline">Register here</Link></p>
+              </div>
+            } />
+            <Route path="register" element={<div className="text-center text-2xl mt-10">Register Page</div>} />
+          </Route>
         </Routes>
       </div>
     </div>
