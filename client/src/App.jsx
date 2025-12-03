@@ -1,7 +1,7 @@
 import { Routes, Route, Link, Navigate, Outlet } from 'react-router';
-import NavBar from './components/NavBar';
-import Hero from './components/Hero';
-import LatestHits from './components/LatestHits';
+import NavBar from './components/common/NavBar';
+import Hero from './components/home/Hero';
+import LatestHits from './components/home/LatestHits';
 
 function App() {
   return (
