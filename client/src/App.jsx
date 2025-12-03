@@ -1,7 +1,16 @@
 import { Routes, Route, Link, Navigate, Outlet } from 'react-router';
+
 import NavBar from './components/common/NavBar';
 import Hero from './components/home/Hero';
 import LatestHits from './components/home/LatestHits';
+import Catalog from './components/catalog/Catalog';
+import Details from './components/catalog/Details';
+import Create from './components/catalog/crudOperations/Create';
+import Edit from './components/catalog/crudOperations/Edit';
+import Login from './components/auth/Login';
+import Register from './components/auth/Register';
+import About from './components/About';
+import Contact from './components/Contact';
 
 function App() {
   return (
@@ -14,22 +23,17 @@ function App() {
             <LatestHits />
           </>
         } />
-        <Route path="/catalog" element={<div className="page-container text-center text-2xl mt-10">Catalog</div>} />
-        <Route path="/catalog/:id" element={<div className="page-container text-center text-2xl mt-10">Details</div>} />
-        <Route path="/create" element={<div className="page-container text-center text-2xl mt-10">Create Record</div>} />
-        <Route path="/edit/:id" element={<div className="page-container text-center text-2xl mt-10">Edit Record</div>} />
-        <Route path="/about" element={<div className="page-container text-center text-2xl mt-10">About Us</div>} />
-        <Route path="/contact" element={<div className="page-container text-center text-2xl mt-10">Contact Us</div>} />
+        <Route path="/catalog" element={<Catalog />} />
+        <Route path="/catalog/:id" element={<Details />} />
+        <Route path="/create" element={<Create />} />
+        <Route path="/edit/:id" element={<Edit />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
         
         <Route path="/auth" element={<Outlet />}>
           <Route index element={<Navigate to="login" />} />
-          <Route path="login" element={
-            <div className="page-container text-center mt-10">
-              <h2 className="text-2xl mb-4">Login Page</h2>
-              <p>Don't have an account? <Link to="/auth/register" className="text-purple-500 hover:underline">Register here</Link></p>
-            </div>
-          } />
-          <Route path="register" element={<div className="page-container text-center text-2xl mt-10">Register Page</div>} />
+          <Route path="login" element={<Login />} />
+          <Route path="register" element={<Register />} />
         </Route>
       </Routes>
     </>
