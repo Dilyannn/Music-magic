@@ -1,57 +1,39 @@
-import { useState } from 'react';
+import { useContext } from 'react';
 import { useNavigate } from 'react-router';
 
+import UserContext from '../../contexts/UserContext';
+import useForm from '../../hooks/useForm';
 import HeaderAuth from './others/HeaderAuth.jsx';
 import ButtonSvg from './others/ButtonSvg.jsx';
 import AuthLink from './others/AuthLink.jsx';
 
 const Register = () => {
   const navigate = useNavigate();
-  const [formValues, setFormValues] = useState({
-    email: '',
-    password: '',
-    confirmPassword: ''
-  });
+  const { registerHandler } = useContext(UserContext);
 
-  const onChangeHandler = (e) => {
-    setFormValues(state => ({
-      ...state,
-      [e.target.name]: e.target.value
-    }));
-  };
+  const { values, changeHandler, formAction } = useForm(
+    async ({ email, password, confirmPassword }) => {
+        if (password !== confirmPassword) {
+            return;
+        }
 
-  const submitHandler = async (e) => {
+        try {
+            await registerHandler(email, password);
+            navigate('/');
+        } catch (err) {
+            console.error(err.message);
+        }
+    },
+    {
+        email: '',
+        password: '',
+        confirmPassword: ''
+    }
+  );
+
+  const submitHandler = (e) => {
     e.preventDefault();
-
-    if (formValues.password !== formValues.confirmPassword) {
-      alert('Passwords do not match!');
-      return;
-    }
-
-    try {
-      const response = await fetch('http://localhost:3030/users/register', {
-        method: 'POST',
-        headers: {
-          'content-type': 'application/json'
-        },
-        body: JSON.stringify({
-          email: formValues.email,
-          password: formValues.password
-        })
-      });
-
-      const result = await response.json();
-
-      if (!response.ok) {
-        throw new Error(result.message);
-      }
-
-      localStorage.setItem('accessToken', result.accessToken);
-      navigate('/');
-
-    } catch (err) {
-      console.error(err.message);
-    }
+    formAction();
   };
 
   return (
@@ -71,8 +53,8 @@ const Register = () => {
                   name="email"
                   type="email"
                   required
-                  value={formValues.email}
-                  onChange={onChangeHandler}
+                  value={values.email}
+                  onChange={changeHandler}
                   className="relative block w-full rounded-lg border border-gray-700 bg-gray-800 px-4 py-3 text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none focus:ring-1 focus:ring-purple-500 sm:text-sm"
                   placeholder="Email address"
                 />
@@ -84,8 +66,8 @@ const Register = () => {
                   name="password"
                   type="password"
                   required
-                  value={formValues.password}
-                  onChange={onChangeHandler}
+                  value={values.password}
+                  onChange={changeHandler}
                   className="relative block w-full rounded-lg border border-gray-700 bg-gray-800 px-4 py-3 text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none focus:ring-1 focus:ring-purple-500 sm:text-sm"
                   placeholder="Password"
                 />
@@ -97,8 +79,8 @@ const Register = () => {
                   name="confirmPassword"
                   type="password"
                   required
-                  value={formValues.confirmPassword}
-                  onChange={onChangeHandler}
+                  value={values.confirmPassword}
+                  onChange={changeHandler}
                   className="relative block w-full rounded-lg border border-gray-700 bg-gray-800 px-4 py-3 text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none focus:ring-1 focus:ring-purple-500 sm:text-sm"
                   placeholder="Confirm Password"
                 />
