@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 
 import HeaderAuth from './others/HeaderAuth.jsx';
 import ButtonSvg from './others/ButtonSvg.jsx';
+import AuthLink from './others/AuthLink.jsx';
 
 const Login = () => {
   return (
@@ -49,14 +50,11 @@ const Login = () => {
             </div>
           </form>
 
-          <div className="text-center text-sm">
-            <p className="text-gray-400">
-              Don't have an account?{' '}
-              <Link to="/auth/register" className="font-medium text-purple-500 hover:text-purple-400 transition duration-200">
-                Register
-              </Link>
-            </p>
-          </div>
+          <AuthLink 
+            text="Don't have an account?" 
+            linkText="Register" 
+            linkTo="/auth/register" 
+          />
         </div>
       </div>
     </div>

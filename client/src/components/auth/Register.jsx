@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 
 import HeaderAuth from './others/HeaderAuth.jsx';
 import ButtonSvg from './others/ButtonSvg.jsx';
+import AuthLink from './others/AuthLink.jsx';
 
 const Register = () => {
   return (
@@ -60,14 +61,11 @@ const Register = () => {
             </div>
           </form>
 
-          <div className="text-center text-sm">
-            <p className="text-gray-400">
-              Already have an account?{' '}
-              <Link to="/auth/login" className="font-medium text-purple-500 hover:text-purple-400 transition duration-200">
-                Log In
-              </Link>
-            </p>
-          </div>
+          <AuthLink 
+            text="Already have an account?" 
+            linkText="Log In" 
+            linkTo="/auth/login" 
+          />
         </div>
       </div>
     </div>
