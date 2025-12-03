@@ -19,7 +19,6 @@ const Register = () => {
                   id="email"
                   name="email"
                   type="email"
-                  autoComplete="email"
                   required
                   className="relative block w-full rounded-lg border border-gray-700 bg-gray-800 px-4 py-3 text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none focus:ring-1 focus:ring-purple-500 sm:text-sm"
                   placeholder="Email address"
@@ -31,7 +30,6 @@ const Register = () => {
                   id="password"
                   name="password"
                   type="password"
-                  autoComplete="new-password"
                   required
                   className="relative block w-full rounded-lg border border-gray-700 bg-gray-800 px-4 py-3 text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none focus:ring-1 focus:ring-purple-500 sm:text-sm"
                   placeholder="Password"
@@ -43,7 +41,6 @@ const Register = () => {
                   id="confirm-password"
                   name="confirm-password"
                   type="password"
-                  autoComplete="new-password"
                   required
                   className="relative block w-full rounded-lg border border-gray-700 bg-gray-800 px-4 py-3 text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none focus:ring-1 focus:ring-purple-500 sm:text-sm"
                   placeholder="Confirm Password"
