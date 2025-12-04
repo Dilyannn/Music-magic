@@ -1,11 +1,11 @@
-import { useContext } from 'react';
-import { useNavigate } from 'react-router';
+import { useContext } from "react";
+import { useNavigate } from "react-router";
 
-import UserContext from '../../contexts/UserContext';
-import useForm from '../../hooks/useForm';
-import HeaderAuth from './others/HeaderAuth.jsx';
-import ButtonSvg from './others/ButtonSvg.jsx';
-import AuthLink from './others/AuthLink.jsx';
+import UserContext from "../../contexts/UserContext";
+import useForm from "../../hooks/useForm";
+import HeaderAuth from "./others/HeaderAuth.jsx";
+import ButtonSvg from "./others/ButtonSvg.jsx";
+import AuthLink from "./others/AuthLink.jsx";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -13,16 +13,16 @@ const Login = () => {
 
   const { values, changeHandler, formAction } = useForm(
     async ({ email, password }) => {
-        try {
-            await loginHandler(email, password);
-            navigate('/');
-        } catch (err) {
-            console.error(err.message);
-        }
+      try {
+        await loginHandler(email, password);
+        navigate("/");
+      } catch (err) {
+        console.error(err.message);
+      }
     },
     {
-        email: '',
-        password: ''
+      email: "",
+      password: "",
     }
   );
 
@@ -33,16 +33,19 @@ const Login = () => {
 
   return (
     <div className="flex items-center justify-center bg-gray-900 text-white">
-        
       <div className="w-full max-w-md p-8 sm:p-12">
         <div className="w-full space-y-8">
-
-          <HeaderAuth title={'Welcome Back'} subtitle={'Please enter your details to log in.'}/>
+          <HeaderAuth
+            title={"Welcome Back"}
+            subtitle={"Please enter your details to log in."}
+          />
 
           <form className="mt-8 space-y-6" onSubmit={submitHandler}>
             <div className="space-y-4">
               <div>
-                <label htmlFor="email" className="sr-only">Email address</label>
+                <label htmlFor="email" className="sr-only">
+                  Email address
+                </label>
                 <input
                   id="email"
                   name="email"
@@ -55,7 +58,9 @@ const Login = () => {
                 />
               </div>
               <div>
-                <label htmlFor="password" className="sr-only">Password</label>
+                <label htmlFor="password" className="sr-only">
+                  Password
+                </label>
                 <input
                   id="password"
                   name="password"
@@ -80,10 +85,10 @@ const Login = () => {
             </div>
           </form>
 
-          <AuthLink 
-            text="Don't have an account?" 
-            linkText="Register" 
-            linkTo="/auth/register" 
+          <AuthLink
+            text="Don't have an account?"
+            linkText="Register"
+            linkTo="/auth/register"
           />
         </div>
       </div>
