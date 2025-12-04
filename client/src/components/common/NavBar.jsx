@@ -28,11 +28,11 @@ const NavBar = () => {
         <Link to="/contact" className="hover-link">Contact Us</Link>
         
         {isAuthenticated ? (
-            <button onClick={onLogout} className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-2 rounded-md font-medium transition duration-300 ml-4">
+            <button onClick={onLogout} className="navbar-btn">
                 Logout
             </button>
         ) : (
-            <Link to="/auth/login" className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-2 rounded-md font-medium transition duration-300 ml-4">
+            <Link to="/auth/login" className="navbar-btn">
                 Login
             </Link>
         )}
