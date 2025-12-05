@@ -1,5 +1,7 @@
 import { Link } from "react-router";
 
+import LatestHitsSvg from './others/LatestHitsSvg';
+
 const Hero = () => {
   const scrollToLatest = () => {
     const element = document.getElementById('latest-hits');
@@ -33,12 +35,8 @@ const Hero = () => {
               onClick={scrollToLatest}
               className="flex items-center space-x-2 text-gray-300 hover:text-white transition duration-300 font-bold"
             >
-              <div className="w-10 h-10 rounded-full border-2 border-gray-500 flex items-center justify-center">
-                <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
-                  <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z" />
-                </svg>
-              </div>
-              <span>Latest Hits</span>
+              <LatestHitsSvg />
+              <span className='cursor-pointer'>Latest Hits</span>
             </button>
           </div>
         </div>
