@@ -58,12 +58,13 @@ export function UserProvider({
         localStorage.setItem('accessToken', result.accessToken);
     }
 
-    const logoutHandler = () => {
-        return request("http://localhost:3030/users/logout", "GET", null, { accessToken: user.accessToken })
-            .finally(() => {
-                setUser(null);
-                localStorage.removeItem('accessToken');
-            });
+    const logoutHandler = async () => {
+        try {
+            await request("http://localhost:3030/users/logout", "GET", null, { accessToken: user.accessToken });
+        } finally {
+            setUser(null);
+            localStorage.removeItem('accessToken');
+        }
     }   
 
     const userContextValues = {
