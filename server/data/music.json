@@ -1,35 +1,38 @@
 {
-    "1a2b3c4d-1234-5678-9101-112131415161": {
-        "_ownerId": "35c62d76-8152-4626-8712-eeb96381bea8",
-        "title": "Bohemian Rhapsody",
-        "artist": "Queen",
-        "genre": "Rock",
-        "duration": "5:55",
-        "releaseDate": "1975-10-31",
-        "imageUrl": "/images/queen.png",
-        "description": "A legendary rock opera song that defies convention.",
-        "_createdOn": 1617194350000
-    },
-    "2b3c4d5e-2234-6678-9101-212131415162": {
-        "_ownerId": "847ec027-f659-4086-8032-5173e2f9c93a",
-        "title": "Billie Jean",
-        "artist": "Michael Jackson",
-        "genre": "Pop",
-        "duration": "4:54",
-        "releaseDate": "1983-01-02",
-        "imageUrl": "/images/mj.png",
-        "description": "One of the best-selling singles of all time.",
-        "_createdOn": 1645708800000
-    },
-    "3c4d5e6f-3334-7678-9101-312131415163": {
-        "_ownerId": "35c62d76-8152-4626-8712-eeb96381bea8",
-        "title": "Smells Like Teen Spirit",
-        "artist": "Nirvana",
-        "genre": "Grunge",
-        "duration": "5:01",
-        "releaseDate": "1991-09-10",
-        "imageUrl": "/images/nirvana.png",
-        "description": "One of the best-selling singles of all time.",
-        "_createdOn": 1617194450000
-    }
+  "1a2b3c4d-1234-5678-9101-112131415161": {
+    "_ownerId": "35c62d76-8152-4626-8712-eeb96381bea8",
+    "title": "The Fate Of Ophelia",
+    "artist": "Taylor Swift",
+    "rating": 5.0,
+    "genre": "Pop",
+    "duration": "3:46",
+    "releaseDate": "2025-10-03",
+    "imageUrl": "https://preview.redd.it/the-fate-of-ophelia-cover-art-made-by-me-v0-qdy4l10ntkjf1.png?auto=webp&s=84228e162e27a563eaf259383191049b36818448",
+    "description": "The Fate of Ophelia” opens The Life of a Showgirl with a direct reference to Shakespeare’s tragic heroine, Ophelia, from the play Hamlet",
+    "_createdOn": 1617194350000
+  },
+  "2b3c4d5e-2234-6678-9101-212131415162": {
+    "_ownerId": "847ec027-f659-4086-8032-5173e2f9c93a",
+    "title": "Golden",
+    "artist": "HUNTR/X",
+    "rating": 5.0,
+    "genre": "K-Pop",
+    "duration": "3:14",
+    "releaseDate": "2025-06-20",
+    "imageUrl": "https://t2.genius.com/unsafe/323x323/https%3A%2F%2Fimages.genius.com%2F83a4701279b25b49b9c7af1940f0b17a.1000x1000x1.png",
+    "description": "Telling a story of personal growth, self-discovery, and rising above past struggles, “Golden” is performed by the fictional girl group HUNTR/X in the 2025 Sony Pictures Animation film KPop Demon Hunters.",
+    "_createdOn": 1645708800000
+  },
+  "3c4d5e6f-3334-7678-9101-312131415163": {
+    "_ownerId": "35c62d76-8152-4626-8712-eeb96381bea8",
+    "title": "Ordinary",
+    "artist": "Alex Warren",
+    "rating": 4.8,
+    "genre": "Chamber pop",
+    "duration": "3:06",
+    "releaseDate": "2025-02-07",
+    "imageUrl": "https://t2.genius.com/unsafe/323x323/https%3A%2F%2Fimages.genius.com%2F30e72e090d74f195ddf3cd5d5f1e4b14.1000x1000x1.png",
+    "description": "During the tracking week ending February 22, 2025, the song debuted at #61 on the Billboard Hot 100 chart. During the tracking week ending June 7, 2025, the song reached a new peak of #1, giving him his first #1 on the chart.",
+    "_createdOn": 1617194450000
+  }
 }
