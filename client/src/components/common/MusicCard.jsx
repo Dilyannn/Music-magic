@@ -1,7 +1,7 @@
 function MusicCardSmall(hit) {
   return (
     <div
-      className="bg-gray-800 rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition duration-300 group"
+      className="bg-gray-800 rounded-lg overflow-hidden shadow-lg cursor-pointer hover:shadow-2xl transition duration-300 group"
     >
       <div className="relative overflow-hidden">
         <img

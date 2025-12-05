@@ -1,15 +1,9 @@
 import { Link } from "react-router";
 
 import LatestHitsSvg from './others/LatestHitsSvg';
+import scrollToLatest from '../../utils/scrollUtil';
 
 const Hero = () => {
-  const scrollToLatest = () => {
-    const element = document.getElementById('latest-hits');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
   return (
     <div className="relative overflow-hidden">
       <div className="container mx-auto px-6 flex flex-col md:flex-row items-center">
@@ -32,7 +26,7 @@ const Hero = () => {
               Discover Now
             </Link>
             <button 
-              onClick={scrollToLatest}
+              onClick={() => scrollToLatest('latest-hits')}
               className="flex items-center space-x-2 text-gray-300 hover:text-white transition duration-300 font-bold"
             >
               <LatestHitsSvg />
