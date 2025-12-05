@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-import MusicCardSmall from '../MusicCard'
+import MusicCardSmall from '../common/MusicCard';
 
 const LatestHits = () => {
   const [hits, setHits] = useState([]);
