@@ -1,10 +1,10 @@
-import { useContext } from "react";
+import { useContext, useCallback } from "react";
 import UserContext from "../contexts/UserContext";
 
 export default function useRequest() {
     const { user, isAuthenticated } = useContext(UserContext);
 
-    const request = async (url, method, data, config = {}) => {
+    const request = useCallback(async (url, method, data, config = {}) => {
         let options = {};
 
         if (method) {
@@ -39,7 +39,7 @@ export default function useRequest() {
         const result = await response.json();
 
         return (result);
-    };
+    }, [user, isAuthenticated]);
 
     return {
         request

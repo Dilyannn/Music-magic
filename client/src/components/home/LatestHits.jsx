@@ -18,7 +18,7 @@ const LatestHits = () => {
     };
 
     fetchHits();
-  }, []);
+  }, [request]);
 
   return (
     <div id="latest-hits" className="container mx-auto px-6 py-12">
