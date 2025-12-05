@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 import useRequest from "../hooks/useRequest";
 
 const UserContext = createContext({
@@ -19,7 +19,28 @@ export function UserProvider({
     children
 }) {
     const [user, setUser] = useState(null);
+    const [loading, setLoading] = useState(() => !!localStorage.getItem('accessToken'));
     const { request } = useRequest();
+
+    useEffect(() => {
+        const token = localStorage.getItem('accessToken');
+        if (token) {
+            request('http://localhost:3030/users/me', 'GET', null, { accessToken: token })
+                .then(data => {
+                    setUser({
+                        ...data,
+                        accessToken: token
+                    });
+                })
+                .catch(() => {
+                    localStorage.removeItem('accessToken');
+                    setUser(null);
+                })
+                .finally(() => {
+                    setLoading(false);
+                });
+        }
+    }, [request]);
 
     const registerHandler = async (email, password) => {
         const newUser = { email, password };
@@ -55,7 +76,7 @@ export function UserProvider({
 
     return(
         <UserContext.Provider value={userContextValues}>
-            {children}
+            {loading ? <div className="flex justify-center items-center h-screen text-white">Loading...</div> : children}
         </UserContext.Provider>
     );
 }
