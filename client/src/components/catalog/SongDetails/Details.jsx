@@ -4,6 +4,12 @@ import useRequest from "../../../hooks/useRequest";
 import UserContext from "../../../contexts/UserContext";
 import Spinner from "../../common/Spinner";
 
+// TODO refactor comments into separate component
+// TODO implement comment posting functionality
+// TODO implement play button functionality
+// TODO REFRACTOR the detail component into separate smaller components
+
+
 const Details = () => {
   const { id } = useParams();
   const navigate = useNavigate();
