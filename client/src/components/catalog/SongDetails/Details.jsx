@@ -1,7 +1,7 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router";
 import useRequest from "../../../hooks/useRequest";
-import UserContext from "../../../contexts/UserContext";
+import { useUserContext } from "../../../hooks/useUserContext";
 import Spinner from "../../common/Spinner";
 
 // TODO refactor comments into separate component
@@ -16,7 +16,7 @@ const Details = () => {
   const [music, setMusic] = useState({});
   const [loading, setLoading] = useState(true);
   const { request } = useRequest();
-  const { user } = useContext(UserContext);
+  const { user } = useUserContext();
 
   const isOwner = music._ownerId && user?._id === music._ownerId;
 
@@ -37,7 +37,7 @@ const Details = () => {
     const fetchMusic = async () => {
       try {
         const result = await request(
-          `http://localhost:3030/data/music/${id}`,
+          `/data/music/${id}`,
           "GET"
         );
         setMusic(result);

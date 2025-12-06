@@ -1,7 +1,7 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router";
 
-import UserContext from "../../contexts/UserContext";
+import { useUserContext } from "../../hooks/useUserContext";
 import useForm from "../../hooks/useForm";
 import HeaderAuth from "./others/HeaderAuth.jsx";
 import ButtonSvg from "./others/ButtonSvg.jsx";
@@ -9,7 +9,7 @@ import AuthLink from "./others/AuthLink.jsx";
 
 const Login = () => {
   const navigate = useNavigate();
-  const { loginHandler } = useContext(UserContext);
+  const { loginHandler } = useUserContext();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const { values, changeHandler, formAction } = useForm(

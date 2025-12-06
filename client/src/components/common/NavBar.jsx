@@ -1,9 +1,9 @@
 import { Link, useNavigate } from 'react-router';
-import { useContext, useState } from 'react';
-import UserContext from '../../contexts/UserContext';
+import { useState } from 'react';
+import { useUserContext } from '../../hooks/useUserContext';
 
 const NavBar = () => {
-  const { isAuthenticated, logoutHandler } = useContext(UserContext);
+  const { isAuthenticated, logoutHandler } = useUserContext();
   const [isLoggingOut, setIsLoggingOut] = useState(false);
   const navigate = useNavigate();
 

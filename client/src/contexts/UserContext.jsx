@@ -1,7 +1,6 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext } from "react";
 import useRequest from "../hooks/useRequest";
-
-import Spinner from "../components/common/Spinner";
+import usePersistedState from "../hooks/usePersistedState";
 
 const UserContext = createContext({
   isAuthenticated: false,
@@ -12,37 +11,14 @@ const UserContext = createContext({
     _id: "",
     accessToken: "",
   },
-  registerHandler: () => Promise.resolve(),
-  loginHandler: () => Promise.resolve(),
-  logoutHandler: () => Promise.resolve(),
+  registerHandler: async () => {},
+  loginHandler: async () => {},
+  logoutHandler: async () => {},
 });
 
 export function UserProvider({ children }) {
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(
-    () => !!localStorage.getItem("accessToken")
-  );
+  const [user, setUser] = usePersistedState("user", null);
   const { request } = useRequest();
-
-  useEffect(() => {
-    const token = localStorage.getItem("accessToken");
-    if (token) {
-      request("/users/me", "GET", null, { accessToken: token })
-        .then((data) => {
-          setUser({
-            ...data,
-            accessToken: token,
-          });
-        })
-        .catch(() => {
-          localStorage.removeItem("accessToken");
-          setUser(null);
-        })
-        .finally(() => {
-          setLoading(false);
-        });
-    }
-  }, [request]);
 
   const registerHandler = async (email, password) => {
     const newUser = { email, password };
@@ -50,14 +26,12 @@ export function UserProvider({ children }) {
     const result = await request("/users/register", "POST", newUser);
 
     setUser(result);
-    localStorage.setItem("accessToken", result.accessToken);
   };
 
   const loginHandler = async (email, password) => {
     const result = await request("/users/login", "POST", { email, password });
 
     setUser(result);
-    localStorage.setItem("accessToken", result.accessToken);
   };
 
   const logoutHandler = async () => {
@@ -67,7 +41,6 @@ export function UserProvider({ children }) {
       });
     } finally {
       setUser(null);
-      localStorage.removeItem("accessToken");
     }
   };
 
@@ -81,7 +54,7 @@ export function UserProvider({ children }) {
 
   return (
     <UserContext.Provider value={userContextValues}>
-      {loading ? <Spinner /> : children}
+      {children}
     </UserContext.Provider>
   );
 }
