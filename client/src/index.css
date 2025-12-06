@@ -21,4 +21,8 @@
   .navbar-btn {
     @apply bg-purple-600 hover:bg-purple-700 text-white cursor-pointer px-6 py-2 rounded-md font-medium transition duration-300 ml-4;
   }
+
+  .form-input {
+    @apply w-full bg-gray-900 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500;
+  }
 }
