@@ -2,7 +2,9 @@ import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router";
 import useForm from "../../../hooks/useForm";
 import useRequest from "../../../hooks/useRequest";
+
 import MusicForm from "./MusicForm";
+import Spinner from "../../common/Spinner";
 
 const Edit = () => {
   const navigate = useNavigate();
@@ -59,7 +61,11 @@ const Edit = () => {
   };
 
   if (loading) {
-    return <div className="text-center text-white mt-10">Loading...</div>;
+    return (
+      <div className="container mx-auto px-6 py-12 flex justify-center">
+        <Spinner />
+      </div>
+    );
   }
 
   return (
