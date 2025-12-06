@@ -18,5 +18,6 @@ export default function useForm(callback, initialValues) {
     values,
     changeHandler,
     formAction,
+    setValues,
   };
 }

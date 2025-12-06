@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react";
-import { useParams } from "react-router";
+import { useState, useEffect, useContext } from "react";
+import { useParams, Link } from "react-router";
 import useRequest from "../../../hooks/useRequest";
+import UserContext from "../../../contexts/UserContext";
 import Spinner from "../../common/Spinner";
 
 const Details = () => {
@@ -8,6 +9,9 @@ const Details = () => {
   const [music, setMusic] = useState({});
   const [loading, setLoading] = useState(true);
   const { request } = useRequest();
+  const { user } = useContext(UserContext);
+
+  const isOwner = music._ownerId && user?._id === music._ownerId;
 
   useEffect(() => {
     const fetchMusic = async () => {
@@ -120,6 +124,20 @@ const Details = () => {
                   <span>{music.rating}</span>
                 </div>
               </div>
+
+              {isOwner && (
+                <div className="mt-6 flex space-x-4">
+                  <Link
+                    to={`/edit/${id}`}
+                    className="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-500 transition-colors"
+                  >
+                    Edit
+                  </Link>
+                  <button className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-500 transition-colors">
+                    Delete
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         </div>
