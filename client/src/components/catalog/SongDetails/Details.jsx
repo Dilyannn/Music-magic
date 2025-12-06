@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router";
-import useRequest from "../../hooks/useRequest";
-import Spinner from "../common/Spinner";
+import useRequest from "../../../hooks/useRequest";
+import Spinner from "../../common/Spinner";
 
 const Details = () => {
   const { id } = useParams();

@@ -4,7 +4,7 @@ import NavBar from './components/common/NavBar';
 import Hero from './components/home/Hero';
 import LatestHits from './components/home/LatestHits';
 import Catalog from './components/catalog/Catalog';
-import Details from './components/catalog/Details';
+import Details from './components/catalog/SongDetails/Details';
 import Create from './components/catalog/crudOperations/Create';
 import Edit from './components/catalog/crudOperations/Edit';
 import Login from './components/auth/Login';
