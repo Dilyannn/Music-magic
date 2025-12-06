@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 import useForm from "../../../hooks/useForm";
 import useRequest from "../../../hooks/useRequest";
+import FormInput from "./FormInput";
 
 const Create = () => {
   const navigate = useNavigate();
@@ -45,160 +46,94 @@ const Create = () => {
           </h2>
           <form onSubmit={submitHandler} className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
-                <label
-                  htmlFor="title"
-                  className="block text-sm font-medium text-gray-400 mb-2"
-                >
-                  Title
-                </label>
-                <input
-                  type="text"
-                  id="title"
-                  name="title"
-                  value={values.title}
-                  onChange={changeHandler}
-                  required
-                  className="form-input"
-                  placeholder="Song Title"
-                />
-              </div>
-
-              <div>
-                <label
-                  htmlFor="artist"
-                  className="block text-sm font-medium text-gray-400 mb-2"
-                >
-                  Artist
-                </label>
-                <input
-                  type="text"
-                  id="artist"
-                  name="artist"
-                  value={values.artist}
-                  onChange={changeHandler}
-                  required
-                  className="form-input"
-                  placeholder="Artist Name"
-                />
-              </div>
-
-              <div>
-                <label
-                  htmlFor="genre"
-                  className="block text-sm font-medium text-gray-400 mb-2"
-                >
-                  Genre
-                </label>
-                <input
-                  type="text"
-                  id="genre"
-                  name="genre"
-                  value={values.genre}
-                  onChange={changeHandler}
-                  required
-                  className="form-input"
-                  placeholder="Genre"
-                />
-              </div>
-
-              <div>
-                <label
-                  htmlFor="duration"
-                  className="block text-sm font-medium text-gray-400 mb-2"
-                >
-                  Duration
-                </label>
-                <input
-                  type="text"
-                  id="duration"
-                  name="duration"
-                  value={values.duration}
-                  onChange={changeHandler}
-                  required
-                  className="form-input"
-                  placeholder="e.g. 3:45"
-                />
-              </div>
-
-              <div>
-                <label
-                  htmlFor="releaseDate"
-                  className="block text-sm font-medium text-gray-400 mb-2"
-                >
-                  Release Date
-                </label>
-                <input
-                  type="date"
-                  id="releaseDate"
-                  name="releaseDate"
-                  value={values.releaseDate}
-                  onChange={changeHandler}
-                  required
-                  className="form-input"
-                />
-              </div>
-
-              <div>
-                <label
-                  htmlFor="rating"
-                  className="block text-sm font-medium text-gray-400 mb-2"
-                >
-                  Rating
-                </label>
-                <input
-                  type="number"
-                  id="rating"
-                  name="rating"
-                  value={values.rating}
-                  onChange={changeHandler}
-                  min="0"
-                  max="5"
-                  step="0.1"
-                  required
-                  className="form-input"
-                  placeholder="0.0 - 5.0"
-                />
-              </div>
-            </div>
-
-            <div>
-              <label
-                htmlFor="imageUrl"
-                className="block text-sm font-medium text-gray-400 mb-2"
-              >
-                Image URL
-              </label>
-              <input
-                type="url"
-                id="imageUrl"
-                name="imageUrl"
-                value={values.imageUrl}
+              
+              <FormInput
+                label="Title"
+                id="title"
+                name="title"
+                value={values.title}
                 onChange={changeHandler}
                 required
-                className="form-input"
-                placeholder="https://..."
+                placeholder="Song Title"
+              />
+
+              <FormInput
+                label="Artist"
+                id="artist"
+                name="artist"
+                value={values.artist}
+                onChange={changeHandler}
+                required
+                placeholder="Artist Name"
+              />
+
+              <FormInput
+                label="Genre"
+                id="genre"
+                name="genre"
+                value={values.genre}
+                onChange={changeHandler}
+                required
+                placeholder="Genre"
+              />
+
+              <FormInput
+                label="Duration"
+                id="duration"
+                name="duration"
+                value={values.duration}
+                onChange={changeHandler}
+                required
+                placeholder="e.g. 3:45"
+              />
+
+              <FormInput
+                label="Release Date"
+                type="date"
+                id="releaseDate"
+                name="releaseDate"
+                value={values.releaseDate}
+                onChange={changeHandler}
+                required
+              />
+
+              <FormInput
+                label="Rating"
+                type="number"
+                id="rating"
+                name="rating"
+                value={values.rating}
+                onChange={changeHandler}
+                required
+                placeholder="0.0 - 5.0"
+                min="0"
+                max="5"
+                step="0.1"
               />
             </div>
 
-            <div>
-              <label
-                htmlFor="description"
-                className="block text-sm font-medium text-gray-400 mb-2"
-              >
-                Description
-              </label>
-              <textarea
-                id="description"
-                name="description"
-                value={values.description}
-                onChange={changeHandler}
-                required
-                rows="4"
-                className="form-input resize-none"
-                placeholder="Album description or lyrics..."
-              ></textarea>
-            </div>
+            <FormInput
+              label="Image URL"
+              type="url"
+              id="imageUrl"
+              name="imageUrl"
+              value={values.imageUrl}
+              onChange={changeHandler}
+              required
+              placeholder="https://..."
+            />
+
+            <FormInput
+              label="Description"
+              as="textarea"
+              id="description"
+              name="description"
+              value={values.description}
+              onChange={changeHandler}
+              required
+              rows="4"
+              placeholder="Album description or lyrics..."
+            />
 
             <div className="pt-4">
               <button
