@@ -204,7 +204,7 @@ const Create = () => {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className={`w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-4 rounded-lg transition duration-300 transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-gray-900 ${
+                className={`w-full bg-purple-600 hover:bg-purple-700 text-white cursor-pointer font-bold py-3 px-4 rounded-lg transition duration-300 transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-gray-900 ${
                   isSubmitting ? "opacity-70 cursor-wait" : ""
                 }`}
               >
