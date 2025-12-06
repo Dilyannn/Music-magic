@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router';
 
 import UserContext from '../../contexts/UserContext';
@@ -10,10 +10,12 @@ import AuthLink from './others/AuthLink.jsx';
 const Register = () => {
   const navigate = useNavigate();
   const { registerHandler } = useContext(UserContext);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const { values, changeHandler, formAction } = useForm(
     async ({ email, password, confirmPassword }) => {
         if (password !== confirmPassword) {
+            setIsSubmitting(false);
             return;
         }
 
@@ -22,6 +24,7 @@ const Register = () => {
             navigate('/');
         } catch (err) {
             console.error(err.message);
+            setIsSubmitting(false);
         }
     },
     {
@@ -31,9 +34,10 @@ const Register = () => {
     }
   );
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
-    formAction();
+    setIsSubmitting(true);
+    await formAction();
   };
 
   return (
@@ -90,10 +94,11 @@ const Register = () => {
             <div>
               <button
                 type="submit"
-                className="group relative flex w-full justify-center rounded-lg bg-purple-600 px-4 py-3 text-sm font-semibold text-white hover:bg-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-gray-900 transition duration-200"
+                disabled={isSubmitting}
+                className={`group relative flex w-full justify-center rounded-lg bg-purple-600 px-4 py-3 text-sm font-semibold text-white hover:bg-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-gray-900 transition duration-200 ${isSubmitting ? 'cursor-wait opacity-70' : 'cursor-pointer'}`}
               >
                 <ButtonSvg />
-                Register
+                {isSubmitting ? 'Registering...' : 'Register'}
               </button>
             </div>
           </form>

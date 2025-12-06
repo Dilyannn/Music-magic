@@ -1,14 +1,22 @@
 import { Link, useNavigate } from 'react-router';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import UserContext from '../../contexts/UserContext';
 
 const NavBar = () => {
   const { isAuthenticated, logoutHandler } = useContext(UserContext);
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
   const navigate = useNavigate();
 
   const onLogout = async () => {
-    await logoutHandler();
-    navigate('/');
+    setIsLoggingOut(true);
+    try {
+      await logoutHandler();
+      navigate('/');
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setIsLoggingOut(false);
+    }
   };
 
   return (
@@ -28,8 +36,12 @@ const NavBar = () => {
         <Link to="/contact" className="hover-link">Contact Us</Link>
         
         {isAuthenticated ? (
-            <button onClick={onLogout} className="navbar-btn">
-                Logout
+            <button 
+              onClick={onLogout} 
+              disabled={isLoggingOut}
+              className={`navbar-btn ${isLoggingOut ? 'cursor-wait opacity-70' : ''}`}
+            >
+                {isLoggingOut ? 'Logging out...' : 'Logout'}
             </button>
         ) : (
             <Link to="/auth/login" className="navbar-btn">

@@ -19,6 +19,6 @@
   }
 
   .navbar-btn {
-    @apply bg-purple-600 hover:bg-purple-700 text-white px-6 py-2 rounded-md font-medium transition duration-300 ml-4;
+    @apply bg-purple-600 hover:bg-purple-700 text-white cursor-pointer px-6 py-2 rounded-md font-medium transition duration-300 ml-4;
   }
 }

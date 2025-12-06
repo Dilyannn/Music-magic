@@ -12,9 +12,9 @@ const UserContext = createContext({
         _id: "",
         accessToken: "",
     },
-    registerHandler() { },
-    loginHandler() { }, 
-    logoutHandler() { },
+    registerHandler: () => Promise.resolve(),
+    loginHandler: () => Promise.resolve(),
+    logoutHandler: () => Promise.resolve(),
 });
 
 export function UserProvider({
