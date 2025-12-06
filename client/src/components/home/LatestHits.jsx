@@ -1,28 +1,10 @@
-import { useState, useEffect } from 'react';
 import useRequest from '../../hooks/useRequest';
 
 import MusicCardSmall from '../common/MusicCard';
 import Spinner from '../common/Spinner';
 
 const LatestHits = () => {
-  const [music, setMusic] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const { request } = useRequest();
-
-  useEffect(() => {
-    const fetchHits = async () => {
-      try {
-        const result = await request('http://localhost:3030/data/music?sortBy=_createdOn%20desc&pageSize=4', 'GET');
-        setMusic(result);
-      } catch (err) {
-        console.error(err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchHits();
-  }, [request]);
+  const { data: music, loading } = useRequest('/data/music?sortBy=_createdOn%20desc&pageSize=4', []);
 
   return (
     <div id="latest-hits" className="container mx-auto px-6 py-30">

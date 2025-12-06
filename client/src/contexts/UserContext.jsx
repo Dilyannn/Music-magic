@@ -27,7 +27,7 @@ export function UserProvider({
     useEffect(() => {
         const token = localStorage.getItem('accessToken');
         if (token) {
-            request('http://localhost:3030/users/me', 'GET', null, { accessToken: token })
+            request('/users/me', 'GET', null, { accessToken: token })
                 .then(data => {
                     setUser({
                         ...data,
@@ -47,14 +47,14 @@ export function UserProvider({
     const registerHandler = async (email, password) => {
         const newUser = { email, password };
 
-        const result = await request("http://localhost:3030/users/register", "POST", newUser);
+        const result = await request("/users/register", "POST", newUser);
 
         setUser(result);
         localStorage.setItem('accessToken', result.accessToken);
     }
 
     const loginHandler = async (email, password) => {
-        const result = await request("http://localhost:3030/users/login", "POST", { email, password });
+        const result = await request("/users/login", "POST", { email, password });
 
         setUser(result);
         localStorage.setItem('accessToken', result.accessToken);
@@ -62,7 +62,7 @@ export function UserProvider({
 
     const logoutHandler = async () => {
         try {
-            await request("http://localhost:3030/users/logout", "GET", null, { accessToken: user.accessToken });
+            await request("/users/logout", "GET", null, { accessToken: user.accessToken });
         } finally {
             setUser(null);
             localStorage.removeItem('accessToken');

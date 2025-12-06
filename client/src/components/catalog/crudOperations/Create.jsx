@@ -12,7 +12,7 @@ const Create = () => {
   const { values, changeHandler, formAction } = useForm(
     async (data) => {
       try {
-        await request("http://localhost:3030/data/music", "POST", data);
+        await request("/data/music", "POST", data);
         navigate("/catalog");
       } catch (err) {
         console.error(err);

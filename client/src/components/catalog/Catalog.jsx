@@ -1,28 +1,10 @@
-import { useState, useEffect } from 'react';
 import useRequest from '../../hooks/useRequest';
 
 import MusicCardSmall from '../common/MusicCard';
 import Spinner from '../common/Spinner';
 
 function Catalog() {
-  const [music, setMusic] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const { request } = useRequest();
-
-  useEffect(() => {
-    const fetchMusic = async () => {
-      try {
-        const result = await request('http://localhost:3030/data/music?sortBy=_createdOn%20desc', 'GET');
-        setMusic(result);
-      } catch (err) {
-        console.error(err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchMusic();
-  }, [request]);
+  const { data: music, loading } = useRequest('/data/music?sortBy=_createdOn%20desc', []);
 
   return (
     <div className="container mx-auto px-6 py-12">
