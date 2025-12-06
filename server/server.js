@@ -1335,7 +1335,7 @@
     var seedData = {
         
         music: {
-           "1a2b3c4d-1234-5678-9101-112131415161": {
+            "1a2b3c4d-1234-5678-9101-112131415161": {
                 "_ownerId": "35c62d76-8152-4626-8712-eeb96381bea8",
                 "title": "The Fate Of Ophelia",
                 "artist": "Taylor Swift",
@@ -1370,7 +1370,19 @@
                 "imageUrl": "https://t2.genius.com/unsafe/323x323/https%3A%2F%2Fimages.genius.com%2F30e72e090d74f195ddf3cd5d5f1e4b14.1000x1000x1.png",
                 "description": "During the tracking week ending February 22, 2025, the song debuted at #61 on the Billboard Hot 100 chart. During the tracking week ending June 7, 2025, the song reached a new peak of #1, giving him his first #1 on the chart.",
                 "_createdOn": 1617194450000
-            }
+            },
+            "71c31e56-0530-4882-9a26-973c6fff7abb": {
+                "_ownerId": "6752bed1-ffda-4cc5-922c-1c003d3d3adf",
+                "title": "All I Want For Christmas Is You",
+                "artist": "Mariah Carey",
+                "rating": 4.7,
+                "genre": "Christmas",
+                "duration": "4:01",
+                "releaseDate": "1994-10-29",
+                "imageUrl": "https://t2.genius.com/unsafe/323x323/https%3A%2F%2Fimages.genius.com%2Fe3d3cce0a600dc517de1a0c964280248.800x800x1.jpg",
+                "description": "“All I Want for Christmas Is You” is a holiday classic, and an uptempo love song. Its narrator declares she doesn’t care about Christmas presents or lights; the best holiday present she can have is to be with the one she loves.",
+                "_createdOn": 1765035087649
+            }       
         },
         comments: {
         
