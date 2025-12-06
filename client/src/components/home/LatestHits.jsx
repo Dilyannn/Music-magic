@@ -2,9 +2,11 @@ import { useState, useEffect } from 'react';
 import useRequest from '../../hooks/useRequest';
 
 import MusicCardSmall from '../common/MusicCard';
+import Spinner from '../common/Spinner';
 
 const LatestHits = () => {
   const [music, setMusic] = useState([]);
+  const [loading, setLoading] = useState(true);
   const { request } = useRequest();
 
   useEffect(() => {
@@ -14,6 +16,8 @@ const LatestHits = () => {
         setMusic(result);
       } catch (err) {
         console.error(err);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -26,12 +30,18 @@ const LatestHits = () => {
         Recently <span className="text-purple-500">Added</span>
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {music.length > 0 ? (
+        {loading ? (
+          <div className="col-span-full flex justify-center">
+            <Spinner small={'45'} styles='flex text-xl leading-tight mb-6 justify-center' />
+          </div>
+        ) : music.length > 0 ? (
           music.map((props) => (
             <MusicCardSmall key={props._id} isNew={true} {...props} />
           ))
         ) : (
-          <p className="text-gray-400">No hits found.</p>
+          <div className="col-span-full flex justify-center">
+            <p className="text-gray-400">No hits found.</p>
+          </div>
         )}
       </div>
     </div>
