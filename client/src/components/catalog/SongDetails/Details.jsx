@@ -1,17 +1,31 @@
 import { useState, useEffect, useContext } from "react";
-import { useParams, Link } from "react-router";
+import { useParams, Link, useNavigate } from "react-router";
 import useRequest from "../../../hooks/useRequest";
 import UserContext from "../../../contexts/UserContext";
 import Spinner from "../../common/Spinner";
 
 const Details = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [music, setMusic] = useState({});
   const [loading, setLoading] = useState(true);
   const { request } = useRequest();
   const { user } = useContext(UserContext);
 
   const isOwner = music._ownerId && user?._id === music._ownerId;
+
+  const deleteHandler = async () => {
+    const hasConfirmed = window.confirm(`Are you sure you want to delete ${music.title}?`);
+
+    if (hasConfirmed) {
+      try {
+        await request(`/data/music/${id}`, "DELETE");
+        navigate("/catalog");
+      } catch (err) {
+        console.error(err);
+      }
+    }
+  };
 
   useEffect(() => {
     const fetchMusic = async () => {
@@ -133,7 +147,10 @@ const Details = () => {
                   >
                     Edit
                   </Link>
-                  <button className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-500 transition-colors">
+                  <button
+                    onClick={deleteHandler}
+                    className="bg-red-600 text-white px-4 py-2 cursor-pointer rounded hover:bg-red-500 transition-colors"
+                  >
                     Delete
                   </button>
                 </div>
