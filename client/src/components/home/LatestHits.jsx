@@ -12,7 +12,7 @@ const LatestHits = () => {
   useEffect(() => {
     const fetchHits = async () => {
       try {
-        const result = await request('http://localhost:3030/data/music?sortBy=_createdOn%20desc&pageSize=3', 'GET');
+        const result = await request('http://localhost:3030/data/music?sortBy=_createdOn%20desc&pageSize=4', 'GET');
         setMusic(result);
       } catch (err) {
         console.error(err);
