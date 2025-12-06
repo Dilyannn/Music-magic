@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams, Link } from "react-router";
+import { useParams } from "react-router";
 import useRequest from "../../hooks/useRequest";
 import Spinner from "../common/Spinner";
 
@@ -37,10 +37,8 @@ const Details = () => {
 
   return (
     <div className="container mx-auto px-6 py-12">
-      {/* Header Section */}
       <div className="bg-gray-800 rounded-lg shadow-xl overflow-hidden">
         <div className="md:flex">
-          {/* Album Art */}
           <div className="md:w-1/3 lg:w-1/4 relative group">
             <img
               src={music.imageUrl}
@@ -60,7 +58,6 @@ const Details = () => {
             </div>
           </div>
 
-          {/* Info */}
           <div className="p-8 md:w-2/3 lg:w-3/4 flex flex-col justify-center relative bg-linear-to-r from-gray-900 to-gray-800">
             <div className="z-10">
               <h1 className="text-4xl md:text-5xl font-bold text-white mb-2">
@@ -129,7 +126,6 @@ const Details = () => {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 mt-12">
-        {/* Description */}
         <div className="lg:col-span-2">
           <h3 className="text-2xl font-bold text-white mb-6 border-b border-gray-700 pb-2">
             Description
@@ -139,13 +135,11 @@ const Details = () => {
           </div>
         </div>
 
-        {/* Comments Section */}
         <div className="lg:col-span-1">
           <h3 className="text-2xl font-bold text-white mb-6 border-b border-gray-700 pb-2">
             Comments
           </h3>
 
-          {/* Add Comment */}
           <div className="mb-8 bg-gray-800 p-4 rounded-lg">
             <textarea
               className="w-full bg-gray-900 border border-gray-700 rounded-lg p-3 text-white focus:outline-none focus:border-purple-500 resize-none text-sm"
@@ -159,9 +153,7 @@ const Details = () => {
             </div>
           </div>
 
-          {/* Comment List */}
           <div className="space-y-6">
-            {/* Comment 1 */}
             <div className="flex space-x-4 group">
               <div className="shrink-0">
                 <div className="w-10 h-10 rounded-full bg-purple-500 flex items-center justify-center text-white font-bold shadow-lg">
@@ -212,7 +204,6 @@ const Details = () => {
               </div>
             </div>
 
-            {/* Comment 2 */}
             <div className="flex space-x-4 group">
               <div className="shrink-0">
                 <div className="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold shadow-lg">
