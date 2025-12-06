@@ -23,8 +23,12 @@ function App() {
             <LatestHits />
           </>
         } />
-        <Route path="/catalog" element={<Catalog />} />
-        <Route path="/catalog/:id" element={<Details />} />
+
+        <Route path="/catalog" element={<Outlet />}>
+          <Route index element={<Catalog />} />
+          <Route path=":id" element={<Details />} />
+        </Route>
+
         <Route path="/create" element={<Create />} />
         <Route path="/edit/:id" element={<Edit />} />
         <Route path="/about" element={<About />} />
