@@ -2,46 +2,49 @@ import { useContext, useCallback } from "react";
 import UserContext from "../contexts/UserContext";
 
 export default function useRequest() {
-    const { user, isAuthenticated } = useContext(UserContext);
+  const { user, isAuthenticated } = useContext(UserContext);
 
-    const request = useCallback(async (url, method, data, config = {}) => {
-        let options = {};
+  const request = useCallback(
+    async (url, method, data, config = {}) => {
+      let options = {};
 
-        if (method) {
-            options.method = method;
-        }
+      if (method) {
+        options.method = method;
+      }
 
-        if (data) {
-            options.headers = {
-                "content-type": "application/json"
-            };
+      if (data) {
+        options.headers = {
+          "content-type": "application/json",
+        };
 
-            options.body = JSON.stringify(data);
-        }
+        options.body = JSON.stringify(data);
+      }
 
-        if(config.accessToken || isAuthenticated) {
-            options.headers = {
-                ...options.headers,
-                "X-Authorization": config.accessToken || user.accessToken
-            }
-        }
+      if (config.accessToken || isAuthenticated) {
+        options.headers = {
+          ...options.headers,
+          "X-Authorization": config.accessToken || user.accessToken,
+        };
+      }
 
-        const response = await fetch(url, options);
+      const response = await fetch(url, options);
 
-        if (!response.ok) {
-            throw response.statusText;
-        }
+      if (!response.ok) {
+        throw response.statusText;
+      }
 
-        if(response.status === 204) {
-            return {}; 
-        }
+      if (response.status === 204) {
+        return {};
+      }
 
-        const result = await response.json();
+      const result = await response.json();
 
-        return (result);
-    }, [user, isAuthenticated]);
+      return result;
+    },
+    [user, isAuthenticated]
+  );
 
-    return {
-        request
-    };
+  return {
+    request,
+  };
 }
