@@ -6,12 +6,12 @@ import FormInput from "./FormInput";
 
 const Edit = () => {
   const navigate = useNavigate();
-  const { musicId } = useParams();
+  const { id } = useParams();
   const {
     data: initialData,
     loading,
     request,
-  } = useRequest(`/data/music/${musicId}`, {
+  } = useRequest(`/data/music/${id}`, {
     title: "",
     artist: "",
     genre: "",
@@ -27,8 +27,8 @@ const Edit = () => {
   const { values, changeHandler, formAction, setValues } = useForm(
     async (data) => {
       try {
-        await request(`/data/music/${musicId}`, "PUT", data);
-        navigate(`/catalog/${musicId}`);
+        await request(`/data/music/${id}`, "PUT", data);
+        navigate(`/catalog/${id}`);
       } catch (err) {
         console.error(err);
         setIsSubmitting(false);
