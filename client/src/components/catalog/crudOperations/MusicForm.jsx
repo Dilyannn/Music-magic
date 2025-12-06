@@ -107,7 +107,7 @@ const MusicForm = ({
             isSubmitting ? "opacity-70 cursor-wait" : ""
           }`}
         >
-          {isSubmitting ? submittingText ? <div className="container mx-auto px-6 py-12 flex justify-center"><Spinner /></div> : "" : buttonText}
+          {isSubmitting ? submittingText : buttonText}
         </button>
       </div>
     </form>
