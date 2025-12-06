@@ -9,7 +9,7 @@ function Catalog() {
   return (
     <div className="container mx-auto px-6 py-12">
       <h2 className="text-3xl md:text-4xl font-bold mb-8 text-white">
-        All <span className="text-purple-500">Music</span>
+        All <span className="text-purple-500">Records</span>
       </h2>
 
       {loading ? (
