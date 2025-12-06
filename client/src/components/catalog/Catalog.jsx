@@ -31,7 +31,7 @@ function Catalog() {
       </h2>
 
       {loading ? (
-        <Spinner styles="flex justify-center" />
+        <Spinner styles="flex text-xl leading-tight mb-6 justify-center" />
       ) : music.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {music.map((props) => (
