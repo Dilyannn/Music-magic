@@ -1,6 +1,8 @@
 import { createContext, useState, useEffect } from "react";
 import useRequest from "../hooks/useRequest";
 
+import Spinner from "../components/common/Spinner";
+
 const UserContext = createContext({
     isAuthenticated: false,
     user: {
@@ -77,7 +79,7 @@ export function UserProvider({
 
     return(
         <UserContext.Provider value={userContextValues}>
-            {loading ? <div className="flex justify-center items-center h-screen text-white">Loading...</div> : children}
+            {loading ? <Spinner /> : children}
         </UserContext.Provider>
     );
 }
