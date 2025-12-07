@@ -3,6 +3,7 @@ import { useParams, Link, useNavigate } from "react-router";
 import useRequest from "../../../hooks/useRequest";
 import { useUserContext } from "../../../hooks/useUserContext";
 import Spinner from "../../common/Spinner";
+import Lyrics from "./Lyrics";
 
 // TODO refactor comments into separate component
 // TODO implement comment posting functionality
@@ -177,129 +178,11 @@ const Details = () => {
           <div className="text-gray-300 space-y-6 leading-relaxed text-lg font-serif">
             <p>{music.description}</p>
           </div>
+
+          <Lyrics title={music.title} artist={music.artist} />
         </div>
 
         <div className="lg:col-span-1">
-          <h3 className="text-2xl font-bold text-white mb-6 border-b border-gray-700 pb-2">
-            Comments
-          </h3>
-
-          <div className="mb-8 bg-gray-800 p-4 rounded-lg">
-            <textarea
-              className="w-full bg-gray-900 border border-gray-700 rounded-lg p-3 text-white focus:outline-none focus:border-purple-500 resize-none text-sm"
-              rows="3"
-              placeholder="Add a comment..."
-            ></textarea>
-            <div className="flex justify-end mt-2">
-              <button className="px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700 transition-colors text-sm font-medium">
-                Post
-              </button>
-            </div>
-          </div>
-
-          <div className="space-y-6">
-            <div className="flex space-x-4 group">
-              <div className="shrink-0">
-                <div className="w-10 h-10 rounded-full bg-purple-500 flex items-center justify-center text-white font-bold shadow-lg">
-                  E
-                </div>
-              </div>
-              <div className="grow">
-                <div className="flex items-center justify-between mb-1">
-                  <span className="font-semibold text-white text-sm">
-                    EvahFolkner
-                  </span>
-                  <span className="text-gray-500 text-xs">5 years ago</span>
-                </div>
-                <p className="text-gray-300 text-sm">Very good!</p>
-                <div className="flex items-center space-x-4 mt-2 text-gray-500 text-xs opacity-0 group-hover:opacity-100 transition-opacity">
-                  <button className="hover:text-purple-400 flex items-center transition-colors">
-                    <svg
-                      className="w-4 h-4 mr-1"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714.211 1.412.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"
-                      ></path>
-                    </svg>
-                    29
-                  </button>
-                  <button className="hover:text-red-400 transition-colors">
-                    <svg
-                      className="w-4 h-4"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M10 14H5.236a2 2 0 01-1.789-2.894l3.5-7A2 2 0 018.736 3h4.018a2 2 0 01.485.06l3.76.94m-7 10v5a2 2 0 002 2h.095c.5 0 .905-.405.905-.905 0-.714-.211-1.412-.608-2.006L17 13V4m-7 10h2m5-10h2a2 2 0 012 2v6a2 2 0 01-2 2h-2.5"
-                      ></path>
-                    </svg>
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <div className="flex space-x-4 group">
-              <div className="shrink-0">
-                <div className="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold shadow-lg">
-                  I
-                </div>
-              </div>
-              <div className="grow">
-                <div className="flex items-center justify-between mb-1">
-                  <span className="font-semibold text-white text-sm">
-                    I don't know
-                  </span>
-                  <span className="text-gray-500 text-xs">5 years ago</span>
-                </div>
-                <p className="text-gray-300 text-sm">
-                  This is one of the best rhyming schemes I've ever seen
-                </p>
-                <div className="flex items-center space-x-4 mt-2 text-gray-500 text-xs opacity-0 group-hover:opacity-100 transition-opacity">
-                  <button className="hover:text-purple-400 flex items-center transition-colors">
-                    <svg
-                      className="w-4 h-4 mr-1"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714.211 1.412.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"
-                      ></path>
-                    </svg>
-                    23
-                  </button>
-                  <button className="hover:text-red-400 transition-colors">
-                    <svg
-                      className="w-4 h-4"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M10 14H5.236a2 2 0 01-1.789-2.894l3.5-7A2 2 0 018.736 3h4.018a2 2 0 01.485.06l3.76.94m-7 10v5a2 2 0 002 2h.095c.5 0 .905-.405.905-.905 0-.714-.211-1.412-.608-2.006L17 13V4m-7 10h2m5-10h2a2 2 0 012 2v6a2 2 0 01-2 2h-2.5"
-                      ></path>
-                    </svg>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </div>
