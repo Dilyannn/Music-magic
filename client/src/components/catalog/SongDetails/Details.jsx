@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router";
-import useRequest from "../../../hooks/useRequest";
 import { useUserContext } from "../../../hooks/useUserContext";
+import useRequest from "../../../hooks/useRequest";
+
+import { PlayIcon, CalendarIcon, ClockIcon, StarIcon } from "./Icons";
 import Spinner from "../../common/Spinner";
 import Lyrics from "./Lyrics";
 
@@ -10,19 +12,22 @@ import Lyrics from "./Lyrics";
 // TODO implement play button functionality
 // TODO REFRACTOR the detail component into separate smaller components
 
-
 const Details = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+
   const [music, setMusic] = useState({});
   const [loading, setLoading] = useState(true);
+
   const { request } = useRequest();
   const { user } = useUserContext();
 
   const isOwner = music._ownerId && user?._id === music._ownerId;
 
   const deleteHandler = async () => {
-    const hasConfirmed = window.confirm(`Are you sure you want to delete ${music.title}?`);
+    const hasConfirmed = window.confirm(
+      `Are you sure you want to delete ${music.title}?`
+    );
 
     if (hasConfirmed) {
       try {
@@ -37,10 +42,7 @@ const Details = () => {
   useEffect(() => {
     const fetchMusic = async () => {
       try {
-        const result = await request(
-          `/data/music/${id}`,
-          "GET"
-        );
+        const result = await request(`/data/music/${id}`, "GET");
         setMusic(result);
       } catch (err) {
         console.error(err);
@@ -67,23 +69,13 @@ const Details = () => {
     <div className="container mx-auto px-6 py-12">
       <div className="bg-gray-800 rounded-lg shadow-xl overflow-hidden">
         <div className="md:flex">
+          
           <div className="md:w-1/3 lg:w-1/4 relative group">
             <img
               src={music.imageUrl}
               alt={music.title}
               className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-              <button className="bg-purple-600 text-white rounded-full p-3 hover:bg-purple-700 transform hover:scale-105 transition-all">
-                <svg
-                  className="w-8 h-8"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"></path>
-                </svg>
-              </button>
-            </div>
           </div>
 
           <div className="p-8 md:w-2/3 lg:w-3/4 flex flex-col justify-center relative bg-linear-to-r from-gray-900 to-gray-800">
@@ -106,45 +98,15 @@ const Details = () => {
 
               <div className="flex items-center space-x-6 text-gray-400 text-sm">
                 <div className="flex items-center" title="Release Date">
-                  <svg
-                    className="w-4 h-4 mr-2"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                    ></path>
-                  </svg>
+                  <CalendarIcon />
                   <span>{music.releaseDate}</span>
                 </div>
                 <div className="flex items-center" title="Duration">
-                  <svg
-                    className="w-4 h-4 mr-2"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                    ></path>
-                  </svg>
+                  <ClockIcon />
                   <span>{music.duration}</span>
                 </div>
                 <div className="flex items-center" title="Rating">
-                  <svg
-                    className="w-4 h-4 mr-2 text-yellow-500"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                  </svg>
+                  <StarIcon />
                   <span>{music.rating}</span>
                 </div>
               </div>
@@ -182,8 +144,7 @@ const Details = () => {
           <Lyrics title={music.title} artist={music.artist} />
         </div>
 
-        <div className="lg:col-span-1">
-        </div>
+        <div className="lg:col-span-1"></div>
       </div>
     </div>
   );
