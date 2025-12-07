@@ -12,6 +12,7 @@ import Register from './components/auth/Register';
 import About from './components/About';
 import Contact from './components/Contact';
 import RouteGuard from './components/common/RouteGuard';
+import NotFound from './components/common/NotFound';
 
 function App() {
   return (
@@ -43,6 +44,8 @@ function App() {
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
         </Route>
+
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </>
   );
