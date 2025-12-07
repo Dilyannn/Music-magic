@@ -11,6 +11,7 @@ import Login from './components/auth/Login';
 import Register from './components/auth/Register';
 import About from './components/About';
 import Contact from './components/Contact';
+import RouteGuard from './components/common/RouteGuard';
 
 function App() {
   return (
@@ -29,8 +30,11 @@ function App() {
           <Route path=":id" element={<Details />} />
         </Route>
 
-        <Route path="/create" element={<Create />} />
-        <Route path="/edit/:id" element={<Edit />} />
+        <Route element={<RouteGuard />}>
+          <Route path="/create" element={<Create />} />
+          <Route path="/edit/:id" element={<Edit />} />
+        </Route>
+
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         
