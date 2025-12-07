@@ -16,7 +16,7 @@ The project consists of a Client (React) and a Server (SoftUni Practice Server).
 
 #### 1. Start the Backend Server
 
-The backend is a custom REST API provided by SoftUni for practice purposes.
+The backend is a custom REST API provided by [SoftUni Practice Server](https://github.com/softuni-practice-server/softuni-practice-server) for practice purposes.
 
 ```bash
 cd server
