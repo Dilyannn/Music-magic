@@ -7,6 +7,7 @@ export default function useRequest(url, initialState) {
   const { user, isAuthenticated } = useUserContext();
   const [data, setData] = useState(initialState);
   const [loading, setLoading] = useState(!!url);
+  const [error, setError] = useState(null);
 
   const request = useCallback(
     async (url, method, data, config = {}) => {
@@ -38,7 +39,9 @@ export default function useRequest(url, initialState) {
       const response = await fetch(`${baseUrl}${url}`, options);
 
       if (!response.ok) {
-        throw response.statusText;
+        const error = new Error(response.statusText);
+        error.status = response.status;
+        throw error;
       }
 
       if (response.status === 204) {
@@ -67,6 +70,7 @@ export default function useRequest(url, initialState) {
           return;
         }
         console.log(err);
+        setError(err);
         setLoading(false);
       });
 
@@ -78,5 +82,6 @@ export default function useRequest(url, initialState) {
     data,
     setData,
     loading,
+    error,
   };
 }

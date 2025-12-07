@@ -13,6 +13,7 @@ const Edit = () => {
     data: initialData,
     loading,
     request,
+    error,
   } = useRequest(`/data/music/${id}`, {
     title: "",
     artist: "",
@@ -23,6 +24,12 @@ const Edit = () => {
     rating: "",
     description: "",
   });
+
+  useEffect(() => {
+    if (error && error.status === 404) {
+      navigate("/404");
+    }
+  }, [error, navigate]);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
