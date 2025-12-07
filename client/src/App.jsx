@@ -11,7 +11,7 @@ import Login from './components/auth/Login';
 import Register from './components/auth/Register';
 import About from './components/About';
 import Contact from './components/Contact';
-import RouteGuard from './components/common/RouteGuard';
+import RouteGuard from './components/guard/RouteGuard';
 import NotFound from './components/common/NotFound';
 
 function App() {
@@ -39,10 +39,12 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         
-        <Route path="/auth" element={<Outlet />}>
-          <Route index element={<Navigate to="login" />} />
-          <Route path="login" element={<Login />} />
-          <Route path="register" element={<Register />} />
+        <Route element={<RouteGuard guest={true} />}>
+          <Route path="/auth" element={<Outlet />}>
+            <Route index element={<Navigate to="login" />} />
+            <Route path="login" element={<Login />} />
+            <Route path="register" element={<Register />} />
+          </Route>
         </Route>
 
         <Route path="*" element={<NotFound />} />
