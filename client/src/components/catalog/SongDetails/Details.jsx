@@ -43,13 +43,16 @@ const Details = () => {
         setMusic(result);
       } catch (err) {
         console.error(err);
+        if (err.status === 404) {
+          navigate("/404");
+        }
       } finally {
         setLoading(false);
       }
     };
 
     fetchMusic();
-  }, [id, request]);
+  }, [id, request, navigate]);
 
   if (loading) {
     return (
