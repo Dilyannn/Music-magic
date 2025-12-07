@@ -8,8 +8,8 @@
 client/src/
 ├── components/         # UI Components
 │   ├── auth/           # Login, Register forms
-│   ├── catalog/        # Catalog, Details, Create, Edit pages
-│   ├── common/         # Shared components (NavBar, Footer, Spinner)
+│   ├── catalog/        # Catalog, Details, Lyrics, Create, Edit (FormInput, MusicForm)
+│   ├── common/         # Shared components (NavBar, Footer, Spinner, NotFound, MusicCard)
 │   ├── guard/          # Route protection components
 │   └── home/           # Landing page components
 ├── contexts/           # React Context definitions (UserContext)
