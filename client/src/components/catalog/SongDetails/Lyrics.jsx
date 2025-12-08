@@ -12,7 +12,9 @@ const Lyrics = ({ title, artist }) => {
     const fetchLyrics = async () => {
       try {
         const response = await fetch(
-          `https://api.lyrics.ovh/v1/${encodeURIComponent(artist)}/${encodeURIComponent(title)}`
+          `https://corsproxy.io/?${encodeURIComponent(
+            `https://api.lyrics.ovh/v1/${encodeURIComponent(artist)}/${encodeURIComponent(title)}`
+          )}`
         );
         const data = await response.json();
         if (data.lyrics) {

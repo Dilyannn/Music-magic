@@ -6,16 +6,13 @@ import useRequest from "../../../hooks/useRequest";
 import Spinner from "../../common/Spinner";
 import Lyrics from "./Lyrics";
 import DetailsHeader from "./DetailsHeader";
-
-// TODO refactor comments into separate component
-// TODO implement comment posting functionality
-// TODO implement play button functionality
+import Comments from "./Comments";
 
 const Details = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  
   const { user } = useUserContext();
-
   const { data: music, loading, error } = useRequest(`/data/music/${id}`, {});
 
   const isOwner = music._ownerId && user?._id === music._ownerId;
@@ -67,7 +64,9 @@ const Details = () => {
           <Lyrics title={music.title} artist={music.artist} />
         </div>
 
-        <div className="lg:col-span-1"></div>
+        <div className="lg:col-span-1">
+          <Comments musicId={id} isOwner={isOwner} />
+        </div>
       </div>
     </div>
   );
