@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useParams, useNavigate } from "react-router";
 import { useUserContext } from "../../../hooks/useUserContext";
 import useRequest from "../../../hooks/useRequest";
@@ -14,32 +14,17 @@ import DetailsHeader from "./DetailsHeader";
 const Details = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-
-  const [music, setMusic] = useState({});
-  const [loading, setLoading] = useState(true);
-
-  const { request } = useRequest();
   const { user } = useUserContext();
+
+  const { data: music, loading, error } = useRequest(`/data/music/${id}`, {});
 
   const isOwner = music._ownerId && user?._id === music._ownerId;
 
   useEffect(() => {
-    const fetchMusic = async () => {
-      try {
-        const result = await request(`/data/music/${id}`, "GET");
-        setMusic(result);
-      } catch (err) {
-        console.error(err);
-        if (err.status === 404) {
-          navigate("/404");
-        }
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchMusic();
-  }, [id, request, navigate]);
+    if (error && error.status === 404) {
+      navigate("/404");
+    }
+  }, [error, navigate]);
 
   if (loading) {
     return (
