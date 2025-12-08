@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 
+import Spinner from "../../common/Spinner.jsx";
+
 const Lyrics = ({ title, artist }) => {
   const [lyrics, setLyrics] = useState("");
   const [loading, setLoading] = useState(true);
@@ -26,7 +28,8 @@ const Lyrics = ({ title, artist }) => {
     fetchLyrics();
   }, [title, artist]);
 
-  if (loading || !lyrics) return null;
+  if (loading) return <Spinner small={'45'} styles='flex text-xl leading-tight mb-6 justify-center' />;
+  if (!lyrics) return null;
 
   return (
     <div className="mt-12">
