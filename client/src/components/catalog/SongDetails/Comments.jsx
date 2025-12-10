@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 import { useUserContext } from "../../../hooks/useUserContext";
 import useRequest from "../../../hooks/useRequest";
 
@@ -37,8 +38,10 @@ const Comments = ({ musicId, isOwner }) => {
       setComments(updatedComments);
 
       reset();
+      toast.success("Comment posted!");
     } catch (err) {
       console.error("Failed to post comment", err);
+      toast.error(err.message || "Failed to post comment");
     }
   };
 

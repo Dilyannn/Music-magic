@@ -1,4 +1,5 @@
 import { Link, useNavigate } from "react-router";
+import { toast } from "react-toastify";
 import useRequest from "../../../hooks/useRequest";
 import { CalendarIcon, ClockIcon, StarIcon } from "./Icons";
 
@@ -14,9 +15,11 @@ const DetailsHeader = ({ music, isOwner, id }) => {
     if (hasConfirmed) {
       try {
         await request(`/data/music/${id}`, "DELETE");
+        toast.success("Music record deleted successfully!");
         navigate("/catalog");
       } catch (err) {
         console.error(err);
+        toast.error(err.message || "Failed to delete record");
       }
     }
   };

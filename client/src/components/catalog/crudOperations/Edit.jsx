@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 import useRequest from "../../../hooks/useRequest";
 
 import MusicForm from "./MusicForm";
@@ -38,9 +39,11 @@ const Edit = () => {
   const onSubmit = async (data) => {
     try {
       await request(`/data/music/${id}`, "PUT", data);
+      toast.success("Music record updated successfully!");
       navigate(`/catalog/${id}`);
     } catch (err) {
       console.error(err);
+      toast.error(err.message || "Failed to update record");
     }
   };
 

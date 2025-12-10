@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 import { useUserContext } from "../../hooks/useUserContext";
 
 import HeaderAuth from "./others/HeaderAuth.jsx";
@@ -19,9 +20,11 @@ const Login = () => {
   const onSubmit = async (data) => {
     try {
       await loginHandler(data.email, data.password);
+      toast.success("Successfully logged in!");
       navigate("/");
     } catch (err) {
       console.error(err.message);
+      toast.error(err.message || "Failed to login");
     }
   };
 

@@ -1,4 +1,6 @@
 import { Routes, Route, Link, Navigate, Outlet } from 'react-router';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import NavBar from './components/common/NavBar';
 import Hero from './components/home/Hero';
@@ -17,6 +19,18 @@ import NotFound from './components/common/NotFound';
 function App() {
   return (
     <>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
       <NavBar />
       <Routes>
         <Route path="/" element={

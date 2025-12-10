@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 import useRequest from "../../../hooks/useRequest";
 
 import MusicForm from "./MusicForm";
@@ -17,9 +18,11 @@ const Create = () => {
   const onSubmit = async (data) => {
     try {
       await request("/data/music", "POST", data);
+      toast.success("Music record created successfully!");
       navigate("/catalog");
     } catch (err) {
       console.error(err);
+      toast.error(err.message || "Failed to create record");
     }
   };
 

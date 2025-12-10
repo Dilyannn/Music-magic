@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { toast } from "react-toastify";
 
 import Spinner from "../../common/Spinner.jsx";
 
@@ -19,6 +20,8 @@ const Lyrics = ({ title, artist }) => {
         const data = await response.json();
         if (data.lyrics) {
           setLyrics(data.lyrics);
+        } else {
+          toast.error("No lyrics found");
         }
       } catch (error) {
         console.error("Failed to fetch lyrics:", error);
