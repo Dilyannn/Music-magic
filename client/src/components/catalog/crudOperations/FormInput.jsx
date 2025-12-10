@@ -1,17 +1,18 @@
-const FormInput = ({
+import React from 'react';
+
+const FormInput = React.forwardRef(({
   label,
   id,
-  name,
   type = "text",
-  value,
-  onChange,
   placeholder,
-  required = false,
   as = "input",
   rows,
   className = "",
-}) => {
+  error,
+  ...others
+}, ref) => {
   const baseClass = "form-input";
+  const errorClass = error ? "border-red-500 focus:border-red-500 focus:ring-red-500" : "";
 
   return (
     <div>
@@ -26,28 +27,25 @@ const FormInput = ({
       {as === "textarea" ? (
         <textarea
           id={id}
-          name={name}
-          value={value}
-          onChange={onChange}
-          required={required}
+          ref={ref}
           rows={rows}
-          className={`${baseClass} resize-none ${className}`}
+          className={`${baseClass} resize-none ${errorClass} ${className}`}
           placeholder={placeholder}
+          {...others}
         ></textarea>
       ) : (
         <input
           type={type}
           id={id}
-          name={name}
-          value={value}
-          onChange={onChange}
-          required={required}
-          className={`${baseClass} ${className}`}
+          ref={ref}
+          className={`${baseClass} ${errorClass} ${className}`}
           placeholder={placeholder}
+          {...others}
         />
       )}
+      {error && <p className="text-red-500 text-xs mt-1">{error.message}</p>}
     </div>
   );
-};
+});
 
 export default FormInput;

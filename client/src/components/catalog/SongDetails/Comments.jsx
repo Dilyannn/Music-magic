@@ -1,9 +1,8 @@
-import { useState } from "react";
+import { useForm } from "react-hook-form";
 import { useUserContext } from "../../../hooks/useUserContext";
 import useRequest from "../../../hooks/useRequest";
 
 const Comments = ({ musicId, isOwner }) => {
-  const [newComment, setNewComment] = useState("");
   const { isAuthenticated } = useUserContext();
 
   const query = new URLSearchParams({
@@ -17,14 +16,18 @@ const Comments = ({ musicId, isOwner }) => {
     setData: setComments,
   } = useRequest(`/data/comments?${query.toString()}`, []);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!newComment.trim()) return;
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
 
+  const onSubmit = async (data) => {
     try {
       await request("/data/comments", "POST", {
         musicId,
-        text: newComment,
+        text: data.comment,
       });
 
       const updatedComments = await request(
@@ -33,7 +36,7 @@ const Comments = ({ musicId, isOwner }) => {
       );
       setComments(updatedComments);
 
-      setNewComment("");
+      reset();
     } catch (err) {
       console.error("Failed to post comment", err);
     }
@@ -47,16 +50,16 @@ const Comments = ({ musicId, isOwner }) => {
 
       {isAuthenticated && !isOwner && (
         <form
-          onSubmit={handleSubmit}
+          onSubmit={handleSubmit(onSubmit)}
           className="mb-8 bg-gray-800 p-4 rounded-lg"
         >
           <textarea
-            className="w-full bg-gray-900 border border-gray-700 rounded-lg p-3 text-white focus:outline-none focus:border-purple-500 resize-none text-sm"
+            {...register("comment", { required: "Comment cannot be empty" })}
+            className={`w-full bg-gray-900 border ${errors.comment ? 'border-red-500' : 'border-gray-700'} rounded-lg p-3 text-white focus:outline-none focus:border-purple-500 resize-none text-sm`}
             rows="3"
             placeholder="Add a comment..."
-            value={newComment}
-            onChange={(e) => setNewComment(e.target.value)}
           ></textarea>
+          {errors.comment && <p className="text-red-500 text-xs mt-1">{errors.comment.message}</p>}
           <div className="flex justify-end mt-2">
             <button
               type="submit"

@@ -1,8 +1,8 @@
 import FormInput from "./FormInput";
 
 const MusicForm = ({
-  values,
-  changeHandler,
+  register,
+  errors,
   submitHandler,
   isSubmitting,
   buttonText,
@@ -14,65 +14,57 @@ const MusicForm = ({
         <FormInput
           label="Title"
           id="title"
-          name="title"
-          value={values.title || ""}
-          onChange={changeHandler}
-          required
           placeholder="Song Title"
+          {...register("title", { required: "Title is required" })}
+          error={errors.title}
         />
 
         <FormInput
           label="Artist"
           id="artist"
-          name="artist"
-          value={values.artist || ""}
-          onChange={changeHandler}
-          required
           placeholder="Artist Name"
+          {...register("artist", { required: "Artist is required" })}
+          error={errors.artist}
         />
 
         <FormInput
           label="Genre"
           id="genre"
-          name="genre"
-          value={values.genre || ""}
-          onChange={changeHandler}
-          required
           placeholder="Genre"
+          {...register("genre", { required: "Genre is required" })}
+          error={errors.genre}
         />
 
         <FormInput
           label="Duration"
           id="duration"
-          name="duration"
-          value={values.duration || ""}
-          onChange={changeHandler}
-          required
           placeholder="e.g. 3:45"
+          {...register("duration", { required: "Duration is required" })}
+          error={errors.duration}
         />
 
         <FormInput
           label="Release Date"
           type="date"
           id="releaseDate"
-          name="releaseDate"
-          value={values.releaseDate || ""}
-          onChange={changeHandler}
-          required
+          {...register("releaseDate", { required: "Release Date is required" })}
+          error={errors.releaseDate}
         />
 
         <FormInput
           label="Rating"
           type="number"
           id="rating"
-          name="rating"
-          value={values.rating || ""}
-          onChange={changeHandler}
-          required
           placeholder="0.0 - 5.0"
           min="0"
           max="5"
           step="0.1"
+          {...register("rating", { 
+            required: "Rating is required",
+            min: { value: 0, message: "Min rating is 0" },
+            max: { value: 5, message: "Max rating is 5" }
+          })}
+          error={errors.rating}
         />
       </div>
 
@@ -80,23 +72,25 @@ const MusicForm = ({
         label="Image URL"
         type="url"
         id="imageUrl"
-        name="imageUrl"
-        value={values.imageUrl || ""}
-        onChange={changeHandler}
-        required
         placeholder="https://..."
+        {...register("imageUrl", { 
+          required: "Image URL is required",
+          pattern: {
+            value: /^https?:\/\/.+/,
+            message: "Invalid URL"
+          }
+        })}
+        error={errors.imageUrl}
       />
 
       <FormInput
         label="Description"
         as="textarea"
         id="description"
-        name="description"
-        value={values.description || ""}
-        onChange={changeHandler}
-        required
         rows="4"
         placeholder="Album description or lyrics..."
+        {...register("description", { required: "Description is required" })}
+        error={errors.description}
       />
 
       <div className="pt-4">

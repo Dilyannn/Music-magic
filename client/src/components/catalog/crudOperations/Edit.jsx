@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router";
-import useForm from "../../../hooks/useForm";
+import { useForm } from "react-hook-form";
 import useRequest from "../../../hooks/useRequest";
 
 import MusicForm from "./MusicForm";
@@ -14,16 +14,14 @@ const Edit = () => {
     loading,
     request,
     error,
-  } = useRequest(`/data/music/${id}`, {
-    title: "",
-    artist: "",
-    genre: "",
-    duration: "",
-    releaseDate: "",
-    imageUrl: "",
-    rating: "",
-    description: "",
-  });
+  } = useRequest(`/data/music/${id}`, null);
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, isSubmitting },
+  } = useForm();
 
   useEffect(() => {
     if (error && error.status === 404) {
@@ -31,40 +29,19 @@ const Edit = () => {
     }
   }, [error, navigate]);
 
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const { values, changeHandler, formAction, setValues } = useForm(
-    async (data) => {
-      try {
-        await request(`/data/music/${id}`, "PUT", data);
-        navigate(`/catalog/${id}`);
-      } catch (err) {
-        console.error(err);
-        setIsSubmitting(false);
-      }
-    },
-    {
-      title: "",
-      artist: "",
-      genre: "",
-      duration: "",
-      releaseDate: "",
-      imageUrl: "",
-      rating: "",
-      description: "",
-    }
-  );
-
   useEffect(() => {
     if (initialData && !loading) {
-      setValues(initialData);
+      reset(initialData);
     }
-  }, [initialData, loading, setValues]);
+  }, [initialData, loading, reset]);
 
-  const submitHandler = async (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    await formAction();
+  const onSubmit = async (data) => {
+    try {
+      await request(`/data/music/${id}`, "PUT", data);
+      navigate(`/catalog/${id}`);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   if (loading) {
@@ -83,9 +60,9 @@ const Edit = () => {
             Edit Music Record
           </h2>
           <MusicForm
-            values={values}
-            changeHandler={changeHandler}
-            submitHandler={submitHandler}
+            register={register}
+            errors={errors}
+            submitHandler={handleSubmit(onSubmit)}
             isSubmitting={isSubmitting}
             buttonText="Save Changes"
             submittingText="Saving..."

@@ -1,8 +1,7 @@
-import { useState } from "react";
 import { useNavigate } from "react-router";
-
+import { useForm } from "react-hook-form";
 import { useUserContext } from "../../hooks/useUserContext";
-import useForm from "../../hooks/useForm";
+
 import HeaderAuth from "./others/HeaderAuth.jsx";
 import ButtonSvg from "./others/ButtonSvg.jsx";
 import AuthLink from "./others/AuthLink.jsx";
@@ -10,28 +9,20 @@ import AuthLink from "./others/AuthLink.jsx";
 const Login = () => {
   const navigate = useNavigate();
   const { loginHandler } = useUserContext();
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm();
 
-  const { values, changeHandler, formAction } = useForm(
-    async ({ email, password }) => {
-      try {
-        await loginHandler(email, password);
-        navigate("/");
-      } catch (err) {
-        console.error(err.message);
-        setIsSubmitting(false);
-      }
-    },
-    {
-      email: "",
-      password: "",
+  const onSubmit = async (data) => {
+    try {
+      await loginHandler(data.email, data.password);
+      navigate("/");
+    } catch (err) {
+      console.error(err.message);
     }
-  );
-
-  const submitHandler = async (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    await formAction();
   };
 
   return (
@@ -43,7 +34,7 @@ const Login = () => {
             subtitle={"Please enter your details to log in."}
           />
 
-          <form className="mt-8 space-y-6" onSubmit={submitHandler}>
+          <form className="mt-8 space-y-6" onSubmit={handleSubmit(onSubmit)}>
             <div className="space-y-4">
               <div>
                 <label htmlFor="email" className="sr-only">
@@ -51,14 +42,18 @@ const Login = () => {
                 </label>
                 <input
                   id="email"
-                  name="email"
                   type="email"
-                  required
-                  value={values.email}
-                  onChange={changeHandler}
-                  className="relative block w-full rounded-lg border border-gray-700 bg-gray-800 px-4 py-3 text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none focus:ring-1 focus:ring-purple-500 sm:text-sm"
+                  {...register("email", { 
+                    required: "Email is required",
+                    pattern: {
+                      value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                      message: "Invalid email address"
+                    }
+                  })}
+                  className={`relative block w-full rounded-lg border ${errors.email ? 'border-red-500' : 'border-gray-700'} bg-gray-800 px-4 py-3 text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none focus:ring-1 focus:ring-purple-500 sm:text-sm`}
                   placeholder="Email address"
                 />
+                {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email.message}</p>}
               </div>
               <div>
                 <label htmlFor="password" className="sr-only">
@@ -66,14 +61,12 @@ const Login = () => {
                 </label>
                 <input
                   id="password"
-                  name="password"
                   type="password"
-                  required
-                  value={values.password}
-                  onChange={changeHandler}
-                  className="relative block w-full rounded-lg border border-gray-700 bg-gray-800 px-4 py-3 text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none focus:ring-1 focus:ring-purple-500 sm:text-sm"
+                  {...register("password", { required: "Password is required" })}
+                  className={`relative block w-full rounded-lg border ${errors.password ? 'border-red-500' : 'border-gray-700'} bg-gray-800 px-4 py-3 text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none focus:ring-1 focus:ring-purple-500 sm:text-sm`}
                   placeholder="Password"
                 />
+                {errors.password && <p className="text-red-500 text-xs mt-1">{errors.password.message}</p>}
               </div>
             </div>
 

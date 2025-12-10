@@ -1,6 +1,5 @@
-import { useState } from "react";
 import { useNavigate } from "react-router";
-import useForm from "../../../hooks/useForm";
+import { useForm } from "react-hook-form";
 import useRequest from "../../../hooks/useRequest";
 
 import MusicForm from "./MusicForm";
@@ -8,34 +7,20 @@ import MusicForm from "./MusicForm";
 const Create = () => {
   const navigate = useNavigate();
   const { request } = useRequest();
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm();
 
-  const { values, changeHandler, formAction } = useForm(
-    async (data) => {
-      try {
-        await request("/data/music", "POST", data);
-        navigate("/catalog");
-      } catch (err) {
-        console.error(err);
-        setIsSubmitting(false);
-      }
-    },
-    {
-      title: "",
-      artist: "",
-      genre: "",
-      duration: "",
-      releaseDate: "",
-      imageUrl: "",
-      rating: "",
-      description: "",
+  const onSubmit = async (data) => {
+    try {
+      await request("/data/music", "POST", data);
+      navigate("/catalog");
+    } catch (err) {
+      console.error(err);
     }
-  );
-
-  const submitHandler = async (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    await formAction();
   };
 
   return (
@@ -46,9 +31,9 @@ const Create = () => {
             Create Music Record
           </h2>
           <MusicForm
-            values={values}
-            changeHandler={changeHandler}
-            submitHandler={submitHandler}
+            register={register}
+            errors={errors}
+            submitHandler={handleSubmit(onSubmit)}
             isSubmitting={isSubmitting}
             buttonText="Create Record"
             submittingText="Creating..."
