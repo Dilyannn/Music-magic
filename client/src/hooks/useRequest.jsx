@@ -39,7 +39,15 @@ export default function useRequest(url, initialState) {
       const response = await fetch(`${baseUrl}${url}`, options);
 
       if (!response.ok) {
-        const error = new Error(response.statusText);
+        let errorMessage = response.statusText;
+        try {
+          const errorBody = await response.json();
+          if (errorBody.message) errorMessage = errorBody.message;
+        } catch (err) {
+          console.error(err.statusText);
+        }
+
+        const error = new Error(errorMessage);
         error.status = response.status;
         throw error;
       }
