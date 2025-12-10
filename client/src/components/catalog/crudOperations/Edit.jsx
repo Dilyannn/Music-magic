@@ -20,21 +20,17 @@ const Edit = () => {
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors, isSubmitting },
-  } = useForm();
+  } = useForm({
+    defaultValues: initialData || {},
+    values: initialData,
+  });
 
   useEffect(() => {
     if (error && error.status === 404) {
       navigate("/404");
     }
   }, [error, navigate]);
-
-  useEffect(() => {
-    if (initialData && !loading) {
-      reset(initialData);
-    }
-  }, [initialData, loading, reset]);
 
   const onSubmit = async (data) => {
     try {
