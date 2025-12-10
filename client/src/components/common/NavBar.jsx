@@ -1,7 +1,6 @@
 import { Link, useNavigate } from "react-router";
 import { useState } from "react";
 import { useUserContext } from "../../hooks/useUserContext";
-import Spinner from "./Spinner.jsx";
 
 const NavBar = () => {
   const { isAuthenticated, logoutHandler } = useUserContext();
