@@ -15,6 +15,7 @@ import About from './components/About';
 import Contact from './components/Contact';
 import RouteGuard from './components/guard/RouteGuard';
 import NotFound from './components/common/NotFound';
+import Footer from './components/common/Footer.jsx';
 
 function App() {
   return (
@@ -63,6 +64,8 @@ function App() {
 
         <Route path="*" element={<NotFound />} />
       </Routes>
+
+      <Footer />
     </>
   );
 }
